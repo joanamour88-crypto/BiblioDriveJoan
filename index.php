@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="style.css"/>
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -13,25 +14,57 @@
 <body>
     <div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-9">
-				<p> La Bibliothèque de Moulinsart est fermé au public jusqu'à nouvel ordre.</p>
-				<p> Mais il vous est possible de réserver et retirer vos livres via notre service Biblio Drive</p>
-				<span class="navbar-text">Navbar text</span>
-				<input type="text" name="Auteur" size="20"/>
-				<input type="button" name="btn" value="clic">
-					barre de recherche (include)
+			<div class="col-sm-9 p-5 bg-primary text-white">
+				<?php
+					require_once('entete.php')
+				?>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3 bg-info">
 					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="460" height="345">
 			</div>
 		</div>
 		<div class="row">
-		   <div class="col-sm-9">
-					carroussel / résultat de la recherche / pages d'admin (ajout d'un livre)
+			<div class="col-sm-9 bg-success">
+				<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+				<!-- Indicators/dots -->
+				<div class="carousel-indicators">
+					<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+					<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+					<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+				</div>
+
+				<!-- The slideshow/carousel -->
+
+				<?php
+					require_once('connexion.php');
+					$stmt=$connexion->prepare("SELECT photo FROM livre order by dateajout DESC limit 3");
+					$stmt->setFetchMode(PDO::FETCH_OBJ);
+					$stmt->execute();
+					echo '<div class="carousel-inner">';
+					while($enregistrement = $stmt->fetch()){
+						// echo "<center>";
+						echo "<div class='carousel-item active'>";
+						echo "<img src='images-couvertures/covers/" . $enregistrement->photo . "'alt=' . $enregistrement->photo . 'class='col-sm-9 w-25'>";
+						echo "</div>";
+						//echo "</center>";
+					}
+					echo '</div>';
+					?>
+				<!-- Left and right controls/icons -->
+				<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon"></span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+					<span class="carousel-control-next-icon"></span>
+				</button>
 			</div>
-			<div class="col-sm-3" >
-					formulaire de connexion / profil connecté (include)
+			<div class="col-sm-3 bg-warning" >
+				<?php
+					require_once('formulaire.php');
+				?>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
