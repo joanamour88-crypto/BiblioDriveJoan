@@ -14,12 +14,9 @@
     <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-9">
-				<p> La Bibliothèque de Moulinsart est fermé au public jusqu'à nouvel ordre.</p>
-				<p> Mais il vous est possible de réserver et retirer vos livres via notre service Biblio Drive</p>
-				<span class="navbar-text">Navbar text</span>
-				<input type="text" name="Auteur" size="20"/>
-				<input type="button" name="btn" value="clic">
-					barre de recherche (include)
+				<?php
+					require('entete.php')
+				?>
 			</div>
 			<div class="col-sm-3">
 					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="460" height="345">
