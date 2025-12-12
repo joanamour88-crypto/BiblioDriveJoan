@@ -4,7 +4,7 @@
 
     try {
 
-        $dns = 'mysql:host=localhost;dbname=bibliodrive'; // dbname : nom de la base
+        $dns = 'mysql:host=localhost;dbname=bibliodrivejoan'; // dbname : nom de la base
 
         $utilisateur = 'root'; // root sur vos postes
 

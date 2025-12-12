@@ -13,54 +13,46 @@
 </head>
 <body>
     <div class="container-fluid">
+		<?php
+            require('entete.php');
+        ?>
 		<div class="row">
-			<div class="col-sm-9">
-				<?php
-					require('entete.php');
-				?>
-			</div>
-			<div class="col-sm-3 bg-info">
-					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="150" height="100">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-9 bg-info">
+			<div class="col-sm-9 bg-success">
 				<div id="demo" class="carousel slide" data-bs-ride="carousel">
+					<!-- Indicators/dots -->
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+						<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+						<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+					</div>
 
-				<!-- Indicators/dots -->
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-					<button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-					<button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+					<!-- The slideshow/carousel -->
+
+					<?php
+						require_once('connexion.php');
+						$stmt=$connexion->prepare("SELECT photo FROM livre order by dateajout DESC limit 3");
+						$stmt->setFetchMode(PDO::FETCH_OBJ);
+						$stmt->execute();
+						echo '<div class="carousel-inner">';
+						while($enregistrement = $stmt->fetch()){
+							// echo "<center>";
+							echo "<div class='carousel-item active'>";
+							echo "<img src='images-couvertures/covers/" . $enregistrement->photo . "'alt=' . $enregistrement->photo . 'height=" . 450 . "'>";
+							echo "</div>";
+							//echo "</center>";
+						}
+						echo '</div>';
+						?>
+					<!-- Left and right controls/icons -->
+					<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon"></span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+						<span class="carousel-control-next-icon"></span>
+					</button>
 				</div>
-
-				<!-- The slideshow/carousel -->
-
-				<?php
-					require_once('connexion.php');
-					$stmt=$connexion->prepare("SELECT photo FROM livre order by dateajout DESC limit 3");
-					$stmt->setFetchMode(PDO::FETCH_OBJ);
-					$stmt->execute();
-					echo '<div class="carousel-inner">';
-					while($enregistrement = $stmt->fetch()){
-						//echo "<center>";
-						echo "<div class='carousel-item active'>";
-						echo "<img src='images-couvertures/covers/" . $enregistrement->photo . "'alt=' . $enregistrement->photo . 'class='col-sm-9 w-25'>";
-						echo "</div>";
-						//echo "</center>";
-					}
-					echo '</div>';
-				?>
-				<!-- Left and right controls/icons -->
-				<button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon"></span>
-				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-					<span class="carousel-control-next-icon"></span>
-				</button>
 			</div>
-			<button href="../proposition.php">proposition</button>
-			<div class="col-sm-3" >
+			<div class="col-sm-3 bg-warning">
 				<?php
 					require_once('formulaire.php');
 				?>

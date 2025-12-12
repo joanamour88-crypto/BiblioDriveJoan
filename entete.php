@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Document</title>
-</head>
-<body>
-    <p> La Bibliothèque de Moulinsart est fermé au public jusqu'à nouvel ordre.</p>
-	<p> Mais il vous est possible de réserver et retirer vos livres via notre service Biblio Drive</p>
-    <form method="post" action="proposition.php">
-        Aut : <input type="text" name="Auteur" size="40"/>
-	    <input type="button" name="btn" value="Recherche"/>
-    </form>
-</body>
-</html>
+		<div class="row">
+			<div class="col-sm-9">
+                <p> La Bibliothèque de Moulinsart est fermé au public jusqu'à nouvel ordre.</p>
+                <p> Mais il vous est possible de réserver et retirer vos livres via notre service Biblio Drive</p>
+                <form method="get" action="proposition.php">
+                    Aut : <input type="text" name="Auteur" size="40"/>
+                    <button type="submit">recherche</button>
+                </form>
+			</div>
+			<div class="col-sm-3 bg-info">
+					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="350">
+			</div>
+		</div>
+
+

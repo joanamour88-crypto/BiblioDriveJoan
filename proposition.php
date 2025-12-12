@@ -13,27 +13,19 @@
 </head>
 <body>
     <div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-9">
-				<?php
-					require('entete.php');
-				?>
-			</div>
-			<div class="col-sm-3 bg-info">
-					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="150" height="100">
-			</div>
-		</div>
+		<?php
+            require('entete.php');
+        ?>
 		<div class="row">
 			<div class="col-sm-9">
 				<?php
                     require_once('connexion.php');
-                    $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where a.nom like :aut");
-                    $stmt->bindValue(':aut', '%' . $_POST['Auteur'] . '%', PDO::PARAM_STR);
+                    $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where a.nom=:aut");
+                    $stmt->bindValue(':aut', $_GET['Auteur'] , PDO::PARAM_STR);
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
-                    $nblignes = $stmt->execute();
+                	$stmt->execute();
                     while($enregistrement = $stmt->fetch()){
-                        echo '<a href="http://localhost/BiblioDriveJoan/detail_livre.php">suite</a><br>';
-                        
+                        echo '<a href="detail_livre.php?idlivre=' . $enregistrement->nolivre . '" method="get">'. $enregistrement->titre . '(' . $enregistrement->anneeparution . ')</br></a>';
                     }
                 ?>
 			</div>
