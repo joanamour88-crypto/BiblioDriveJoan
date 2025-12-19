@@ -43,7 +43,7 @@
                         '<h5>' . $enregistrement->detail . '</h5>',
             '</div>',
             '<div class="col-sm-3">',
-                '<img src="images-couvertures/covers/' . $enregistrement->photo . '" alt="' . $enregistrement->photo . '">',
+                '<img src="images-couvertures/covers/' . $enregistrement->photo . '" alt="' . $enregistrement->photo . '" height="' . 450 . '">',
             '</div>';
                 ?>
 			<div class="col-sm-3" >
