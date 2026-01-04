@@ -13,25 +13,46 @@
 </head>
 <body>
     <div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-9">
-				<?php
-					require('entete.php');
-				?>
-			</div>
-			<div class="col-sm-3 bg-info">
-					<img src="Château_de_Moulinsart.jpg" alt="Château_de_Moulinsart" width="150" height="100">
-			</div>
-		</div>
+        <?php
+            require('entete.php');
+        ?>
 		<div class="row">
 			<div class="col-sm-9">
 				<?php
                     require_once('connexion.php');
-                    $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where a.nom like :aut");
-                    
+                    $reponse = $_GET["idlivre"];
+                    $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where l.nolivre=:pnumero");
+                    $stmt->bindValue(":pnumero", $reponse);
+                    $stmt->setFetchMode(PDO::FETCH_OBJ);
+                    $stmt->execute();
+                    $enregistrement = $stmt->fetch();
+                    echo 
+                        '<div class="col-sm-6">',
+                            '<h5> Auteur = ' . $enregistrement->prenom . '' . $enregistrement->nom . '</h5>',
+                            '<br>',
+                            '<h5> ISBN13 = ' . $enregistrement->isbn13 . '</h5>',
+                            '<br>',
+                            '<h3> Résumé du Livre : </h3>',
+                            '<br>',
+                            '<h5>' . $enregistrement->detail . '</h5>';
+                    if (!isset($_SESSION['mail'])){
+                        echo
+                        '<form method="get" action="detail_livre.php.php">',
+                            '<input type="hidden" name="idlivre" value="' . $enregistrement->nolivre . '"/>',
+                            '<button type="submit">Ajouter au panier</button>',
+                        '</form>';
+                    }
+                    else{
+                        echo '<h5> Veuillez vous connecter pour ajouter au panier </h5>';
+                    }
+                    echo
+                        '</div>',
+                        '<div class="col-sm-6">',
+                            '<img src="images-couvertures/covers/' . $enregistrement->photo . '" alt="' . $enregistrement->photo . '" height="' . 400 . '">',
+                        '</div>';
                 ?>
-			</div>
-			<div class="col-sm-3" >
+            </div>
+			<div class="col-sm-3">
 				<?php
 					require_once('formulaire.php');
 				?>

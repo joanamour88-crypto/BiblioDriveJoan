@@ -13,23 +13,14 @@
 </head>
 <body>
     <div class="container-fluid">
-		<?php
+        <?php
             require('entete.php');
         ?>
 		<div class="row">
 			<div class="col-sm-9">
-				<?php
-                    require_once('connexion.php');
-                    $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where a.nom=:aut");
-                    $stmt->bindValue(':aut', $_GET['Auteur'] , PDO::PARAM_STR);
-                    $stmt->setFetchMode(PDO::FETCH_OBJ);
-                	$stmt->execute();
-                    while($enregistrement = $stmt->fetch()){
-                        echo '<a href="detail_livre.php?idlivre=' . $enregistrement->nolivre . '" method="get">'. $enregistrement->titre . '(' . $enregistrement->anneeparution . ')</br></a>';
-                    }
-                ?>
-			</div>
-			<div class="col-sm-3" >
+				
+            </div>
+			<div class="col-sm-3">
 				<?php
 					require_once('formulaire.php');
 				?>
