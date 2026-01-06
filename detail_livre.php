@@ -16,7 +16,7 @@
         <?php
             require('entete.php');
         ?>
-		<div class="row">
+		<div class="row" id="top">
 			<div class="col-sm-9">
 				<?php
                     require_once('connexion.php');
@@ -35,11 +35,11 @@
                             '<h3> Résumé du Livre : </h3>',
                             '<br>',
                             '<h5>' . $enregistrement->detail . '</h5>';
-                    if (!isset($_SESSION['mail'])){
+                    if (isset($_SESSION['mail'])){
                         echo
                         '<form method="get" action="detail_livre.php.php">',
-                            '<input type="hidden" name="idlivre" value="' . $enregistrement->nolivre . '"/>',
-                            '<button type="submit">Ajouter au panier</button>',
+                            //'<input type="hidden" name="idlivre" value="' . $enregistrement->nolivre . '"/>',
+                            '<button type="submit" name="ajoutpanier" class="btn btn-outline-info">Ajouter au panier</button>',
                         '</form>';
                     }
                     else{
