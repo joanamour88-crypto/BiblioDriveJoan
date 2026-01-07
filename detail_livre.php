@@ -26,6 +26,7 @@
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
                     $stmt->execute();
                     $enregistrement = $stmt->fetch();
+
                     echo 
                         '<div class="col-sm-6">',
                             '<h5> Auteur = ' . $enregistrement->prenom . '' . $enregistrement->nom . '</h5>',
@@ -36,11 +37,23 @@
                             '<br>',
                             '<h5>' . $enregistrement->detail . '</h5>';
                     if (isset($_SESSION['mail'])){
+
                         echo
-                        '<form method="get" action="detail_livre.php.php">',
+                        '<form method="get" action="detail_livre.php">',
                             //'<input type="hidden" name="idlivre" value="' . $enregistrement->nolivre . '"/>',
-                            '<button type="submit" name="ajoutpanier" class="btn btn-outline-info">Ajouter au panier</button>',
+                            '<button type="submit" name="ajoutpanier" value="' . $enregistrement->nolivre . '" class="btn btn-outline-info">Ajouter au panier</button>',
                         '</form>';
+                        if (isset($_GET['ajoutpanier'])) {
+                            $book_id = $_GET['ajoutpanier'];
+                            if (!isset($_SESSION['panier'])) {
+                                $_SESSION['panier'] = array();
+                            }
+                            if (!in_array($book_id, $_SESSION['panier'])) {
+                                $_SESSION['panier'][] = $book_id;
+                            }
+                            header('Location: panier.php');
+                            exit();
+                        }
                     }
                     else{
                         echo '<h5> Veuillez vous connecter pour ajouter au panier </h5>';

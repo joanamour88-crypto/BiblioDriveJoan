@@ -16,7 +16,7 @@
             <input type="text" name="mail" size="20"/>
             <h4>Mot de passe</h4>
             <input type="password" name="Mdp" size="20"/><br>
-            <button type="submit" class="btn btn-outline-info" name="btn">Se Connecter</button>                
+            <button type="submit" class="btn btn-outline-info" name="btn" id="top">Se Connecter</button>                
             </form>';
             }else{
                 $Mail = $_POST["mail"];
@@ -37,6 +37,7 @@
                 $_SESSION['adresse'] = $enregistrement->adresse;
                 $_SESSION['ville'] = $enregistrement->ville;
                 $_SESSION['codepost'] = $enregistrement->codepostal;
+                $_SESSION['profil'] = $enregistrement->profil;
 
                 echo $_SESSION['prenom'] . " " . $_SESSION['nom'] . "<br>";
                 echo $_SESSION['adresse'] . "<br>";
