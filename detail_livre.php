@@ -20,6 +20,13 @@
 			<div class="col-sm-9">
 				<?php
                     require_once('connexion.php');
+
+                    $stmt=$connexion->prepare("SELECT * from emprunter where nolivre");
+                    $stmt->setFetchMode(PDO::FETCH_OBJ);
+                    $stmt->execute();
+                    $enregistrement = $stmt->fetch();
+                    $nolivre = $enregistrement->nolivre;
+
                     $reponse = $_GET["idlivre"];
                     $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where l.nolivre=:pnumero");
                     $stmt->bindValue(":pnumero", $reponse);
@@ -36,8 +43,14 @@
                             '<h3> Résumé du Livre : </h3>',
                             '<br>',
                             '<h5>' . $enregistrement->detail . '</h5>';
+
                     if (isset($_SESSION['mail'])){
 
+                        if ($enregistrement->nolivre == $nolivre){
+                            echo '<h5 style="color:red;"> Livre déjà emprunté </h5>';
+                        } else {
+                            echo '<h5 style="color:green;"> Livre disponible </h5>';
+                        }
                         echo
                         '<form method="get" action="detail_livre.php">',
                             //'<input type="hidden" name="idlivre" value="' . $enregistrement->nolivre . '"/>',

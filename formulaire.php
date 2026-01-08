@@ -5,8 +5,8 @@
             echo $_SESSION['adresse'] . "<br>";
             echo $_SESSION['ville'] . " " . $_SESSION['codepost'] . "<br>";
             echo '
-            <form action="index.php" method="post">
-                <button type="submit" name="deco">Deconnexion</button>  
+            <form action="index.php" method="post" id="top">
+                <button type="submit" name="deco" class="btn btn-danger">Deconnexion</button>  
             </form>';
         }else{
             if (!isset($_POST["btn"])){
