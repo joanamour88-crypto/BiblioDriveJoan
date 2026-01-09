@@ -24,8 +24,7 @@
                     $stmt=$connexion->prepare("SELECT * from emprunter where nolivre");
                     $stmt->setFetchMode(PDO::FETCH_OBJ);
                     $stmt->execute();
-                    $enregistrement = $stmt->fetch();
-                    $nolivre = $enregistrement->nolivre;
+                    $enregistrement2 = $stmt->fetch();
 
                     $reponse = $_GET["idlivre"];
                     $stmt=$connexion->prepare("SELECT * from livre l inner join auteur a on (l.noauteur = a.noauteur) where l.nolivre=:pnumero");
@@ -46,7 +45,7 @@
 
                     if (isset($_SESSION['mail'])){
 
-                        if ($enregistrement->nolivre == $nolivre){
+                        if ($enregistrement->nolivre == $enregistrement2->nolivre){
                             echo '<h5 style="color:red;"> Livre déjà emprunté </h5>';
                         } else {
                             echo '<h5 style="color:green;"> Livre disponible </h5>';
@@ -69,7 +68,7 @@
                         }
                     }
                     else{
-                        echo '<h5> Veuillez vous connecter pour ajouter au panier </h5>';
+                        echo '<h5 class="text-danger"> Veuillez vous connecter pour ajouter au panier </h5>';
                     }
                     echo
                         '</div>',

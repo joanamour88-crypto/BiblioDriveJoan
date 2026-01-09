@@ -23,7 +23,10 @@
                     require_once('connexion.php');
                     $stmt = $connexion->prepare("SELECT noauteur, nom, prenom FROM auteur ORDER BY nom, prenom");
                     $stmt->execute();
+
+                    if ($_SESSION['profil'] === "admin"){
                 ?>
+
                 <form method="post">
                     <div class="mb-3">
                         <label for="noauteur" class="form-label">Auteur:</label>
@@ -59,6 +62,9 @@
                     </div>
                 </form>
                 <?php
+                    }else{
+                        echo'<h5>vous navez pas le droit !!</h5>';
+                    }
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $insertStmt = $connexion->prepare("INSERT INTO livre (noauteur, titre, isbn13, anneeparution, detail, photo) VALUES (:noauteur, :titre, :isbn13, :anneeparution, :detail, :photo)");
         
@@ -68,6 +74,8 @@
                         $anneeparution = $_POST['anneeparution'];
                         $detail = $_POST['detail'];
                         $photo = $_POST['photo'];
+
+                        $dateactuel= date("Y-a-d");
         
                         $insertStmt->bindValue(':noauteur', $noauteur, PDO::PARAM_INT);
                         $insertStmt->bindValue(':titre', $titre, PDO::PARAM_STR);
@@ -75,6 +83,7 @@
                         $insertStmt->bindValue(':anneeparution', $anneeparution, PDO::PARAM_INT);
                         $insertStmt->bindValue(':detail', $detail, PDO::PARAM_STR);
                         $insertStmt->bindValue(':photo', $photo, PDO::PARAM_STR);
+
         
                         $insertStmt->execute();
                         $nb_ligne_affectees = $insertStmt->rowCount();

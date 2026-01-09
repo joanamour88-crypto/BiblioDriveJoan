@@ -10,6 +10,7 @@
             </form>';
         }else{
             if (!isset($_POST["btn"])){
+            $_SESSION['profil'] = "";
             echo '<form action="index.php" method="post">
             <h3>CONNEXION</h3>
             <h4>Identifiant</h4>
@@ -50,6 +51,7 @@
         } 
         if (isset($_POST["deco"])){
             session_destroy();
+            $_SESSION['profil'] = "";
             header("Location: index.php");
         }
     ?>

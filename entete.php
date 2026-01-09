@@ -21,7 +21,7 @@
                 echo '<form method="get" action="nouvlivre.php">
                         <Button type="submit" class="btn btn-warning">Ajouter un nouveau livre</Button>
                       </form>';
-                header('Refresh:2');
+                //header('Refresh:2');
             }
         ?>
 	</div>

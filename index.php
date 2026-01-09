@@ -35,9 +35,18 @@
 						$stmt->setFetchMode(PDO::FETCH_OBJ);
 						$stmt->execute();
 						echo '<div class="carousel-inner">';
-						while($enregistrement = $stmt->fetch()){
+
+						if($enregistrement = $stmt->fetch()){
 							// echo "<center>";
 							echo "<div class='carousel-item active'>";
+							echo "<img src='images-couvertures/covers/" . $enregistrement->photo . "'alt=' . $enregistrement->photo . 'height=" . 450 . "'>";
+							echo "</div>";
+							//echo "</center>";
+						}
+
+						while($enregistrement = $stmt->fetch()){
+							// echo "<center>";
+							echo "<div class='carousel-item'>";
 							echo "<img src='images-couvertures/covers/" . $enregistrement->photo . "'alt=' . $enregistrement->photo . 'height=" . 450 . "'>";
 							echo "</div>";
 							//echo "</center>";
