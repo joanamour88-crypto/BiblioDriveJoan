@@ -71,3 +71,4 @@
 	</div>
 </body>
 </html>
+<!-- Veut tu que je te rajoute un hash de mot de passe dans ton code ? 

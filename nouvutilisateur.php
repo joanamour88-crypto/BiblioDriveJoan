@@ -19,6 +19,9 @@
 		<div class="row" id="top">
 			<div class="col-sm-9">
 				<h2>Ajouter un nouveau membre</h2>
+                <?php
+                    if ($_SESSION['profil'] === "admin"){
+                ?>
                 <form method="post">
                     <div class="mb-3">
                         <label for="mel" class="form-label">Mel:</label>
@@ -52,6 +55,9 @@
                     <a href="index.php" class="btn btn-secondary">Annuler</a>
                 </form>
                 <?php
+                    }else{
+                        header('location: index.php');
+                    }
                 require_once('connexion.php');
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Préparation de la requête d'insertion
@@ -65,7 +71,7 @@
                     $adresse = $_POST['adresse'];
                     $codepostal = $_POST['postal'];
                     $ville = $_POST['ville'];
-                    
+                    -
                     // Liaison des paramètres
                     $insertStmt->bindValue(':mel', $mel);
                     $insertStmt->bindValue(':motdepasse', $motdepasse);

@@ -56,6 +56,7 @@
                             '<button type="submit" name="ajoutpanier" value="' . $enregistrement->nolivre . '" class="btn btn-outline-info">Ajouter au panier</button>',
                         '</form>';
                         if (isset($_GET['ajoutpanier'])) {
+                            $nblivres = 0;
                             $book_id = $_GET['ajoutpanier'];
                             if (!isset($_SESSION['panier'])) {
                                 $_SESSION['panier'] = array();

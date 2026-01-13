@@ -20,7 +20,7 @@
 			<div class="col-sm-9">
 				<?php
                     require_once('connexion.php');
-
+                    
                     if (isset($_GET['action']) && $_GET['action'] == 'remove' && isset($_GET['id'])) {
                         $id = $_GET['id'];
                         if (isset($_SESSION['panier'])) {

@@ -14,14 +14,16 @@
             <Button type="submit" class="btn btn-info">Panier</Button>
         </form>
         <?php
-            if ($_SESSION['profil'] == 'admin'){
-                echo '<form method="get" action="nouvutilisateur.php">
+            if (isset($_SESSION['profil'])){
+                if ($_SESSION['profil'] == 'admin'){
+                    echo '<form method="get" action="nouvutilisateur.php">
                         <Button type="submit" class="btn btn-warning">Ajouter un nouvel utilisateur</Button>
                       </form>';
                 echo '<form method="get" action="nouvlivre.php">
                         <Button type="submit" class="btn btn-warning">Ajouter un nouveau livre</Button>
                       </form>';
                 //header('Refresh:2');
+                }
             }
         ?>
 	</div>

@@ -30,8 +30,10 @@
                 $stmt->bindValue(':Mdp', $Mdp, PDO::PARAM_STR);
                 $stmt->setFetchMode(PDO::FETCH_OBJ);
                 $stmt->execute();
-                $enregistrement=$stmt->fetch();
 
+                $enregistrement=$stmt->fetch();
+                
+                if ($enregistrement){
                 $_SESSION['mail'] = $Mail;
                 $_SESSION['prenom'] = $enregistrement->prenom;
                 $_SESSION['nom'] = $enregistrement->nom;
@@ -47,6 +49,17 @@
                 <form action="index.php" method="post">
                     <button type="submit" name="deco">Deconnexion</button>  
                 </form>';
+
+                } else {
+                    echo '<form action="index.php" method="post">
+                        <h3>CONNEXION</h3>
+                        <h4>Identifiant</h4>
+                        <input type="text" name="mail" size="20"/>
+                        <h4>Mot de passe</h4>
+                        <input type="password" name="Mdp" size="20"/><br>
+                        <button type="submit" class="btn btn-outline-info" name="btn" id="top">Se Connecter</button>                
+                        </form>';
+                }
             }
         } 
         if (isset($_POST["deco"])){

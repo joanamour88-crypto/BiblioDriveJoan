@@ -63,10 +63,10 @@
                 </form>
                 <?php
                     }else{
-                        echo'<h5>vous navez pas le droit !!</h5>';
+                        header('location: index.php');
                     }
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                        $insertStmt = $connexion->prepare("INSERT INTO livre (noauteur, titre, isbn13, anneeparution, detail, photo) VALUES (:noauteur, :titre, :isbn13, :anneeparution, :detail, :photo)");
+                        $insertStmt = $connexion->prepare("INSERT INTO livre (noauteur, titre, isbn13, anneeparution, detail, dateajout, photo) VALUES (:noauteur, :titre, :isbn13, :anneeparution, :detail, :dateactuel, :photo)");
         
                         $noauteur = $_POST['noauteur'];
                         $titre = $_POST['titre'];
@@ -83,7 +83,7 @@
                         $insertStmt->bindValue(':anneeparution', $anneeparution, PDO::PARAM_INT);
                         $insertStmt->bindValue(':detail', $detail, PDO::PARAM_STR);
                         $insertStmt->bindValue(':photo', $photo, PDO::PARAM_STR);
-
+                        $insertStmt->bindValue(':dateactuel', $dateactuel, PDO::PARAM_STR);
         
                         $insertStmt->execute();
                         $nb_ligne_affectees = $insertStmt->rowCount();
